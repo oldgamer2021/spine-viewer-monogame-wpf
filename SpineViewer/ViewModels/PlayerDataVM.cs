@@ -55,36 +55,36 @@ namespace SpineViewer.ViewModels
             OriginSize = string.Format("{0} x {1}", p.Info.OrgWidth, p.Info.OrgHeight);
             PremulipledAlpha = p.Info.PremultipliedAlpha;
 
-            UseAlpha = p.Stat.UseAlpha;
-            FlipX = p.Stat.FlipX;
-            FlipY = p.Stat.FlipY;
+            UseAlpha = p.Props.UseAlpha;
+            FlipX = p.Props.FlipX;
+            FlipY = p.Props.FlipY;
 
-            Scale = p.Stat.Scale;
+            Scale = p.Props.Scale;
 
             SkinNames.Clear();
             SkinNames.AddRange(p.Info.SkinNames);
             AnimNames.Clear();
             AnimNames.AddRange(p.Info.AnimNames);
-            SelSkin = p.Stat.Skin;
-            SelAnim = p.Stat.Anim;
+            SelSkin = p.Props.Skin;
+            SelAnim = p.Props.Anim;
 
-            IsLoop = p.Stat.IsLoop;
-            PlaySpeed = p.Stat.PlaySpeed;
+            IsLoop = p.Props.IsLoop;
+            PlaySpeed = p.Props.PlaySpeed;
         }
 
         public void ToPlayer(Player p)
         {
-            p.Stat.Scale = Scale;
-            p.Stat.X = X; p.Stat.Y = Y;
+            p.Props.Scale = Scale;
+            p.Props.X = X; p.Props.Y = Y;
 
-            p.Stat.UseAlpha = UseAlpha;
-            p.Stat.FlipX = FlipX; p.Stat.FlipY = FlipY;
+            p.Props.UseAlpha = UseAlpha;
+            p.Props.FlipX = FlipX; p.Props.FlipY = FlipY;
 
-            p.Stat.Skin = SelSkin;
-            p.Stat.Anim = SelAnim;
+            p.Props.Skin = SelSkin;
+            p.Props.Anim = SelAnim;
 
-            p.Stat.IsLoop = IsLoop;
-            p.Stat.PlaySpeed = PlaySpeed;
+            p.Props.IsLoop = IsLoop;
+            p.Props.PlaySpeed = PlaySpeed;
         }
 
         #region INotifyPropertyChanged

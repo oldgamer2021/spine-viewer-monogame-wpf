@@ -61,6 +61,7 @@ namespace SpineViewer
             catch (Exception ex)
             {
                 System.Windows.MessageBox.Show(ex.Message, "Error Add Spine2D");
+                _player = null;
             }
         }
         public void RemoveSpine()

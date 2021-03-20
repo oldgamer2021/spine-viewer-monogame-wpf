@@ -20,8 +20,8 @@ namespace SpineViewer.Common.Player
         public bool UseAlpha { get; set; }
 
         // Skeleton
-        public bool FlipX { get; set; }
-        public bool FlipY { get; set; }
+        public bool FlipX { get; set; } = false;
+        public bool FlipY { get; set; } = false;
         public bool IsLoop { get; set; }
         public string Skin { get; set; }
         // State

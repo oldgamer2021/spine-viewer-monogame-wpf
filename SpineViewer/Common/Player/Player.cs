@@ -13,7 +13,7 @@ namespace SpineViewer.Common.Player
     public abstract class Player: IDisposable
     {
         public PlayerInfo Info { get; set; }
-        public PlayerProps Stat { get; set; }
+        public PlayerProps Props { get; set; }
 
         protected BasicEffect _effect;
 
@@ -32,7 +32,7 @@ namespace SpineViewer.Common.Player
         }
         protected virtual void UpdateStat()
         {
-            SetWorldMatrix(Stat.X, Stat.Y, Stat.Scale);
+            SetWorldMatrix(Props.X, Props.Y, Props.Scale);
         }
         public abstract void Draw(GameTime gameTime, Camera2D cam);
 
@@ -65,7 +65,7 @@ namespace SpineViewer.Common.Player
         public virtual void SetWorldMatrix(float x, float y, float scale)
         {
             // Use WorldMatrix instead of Skeleton
-            Stat.X = x; Stat.Y = y; Stat.Scale = scale;
+            Props.X = x; Props.Y = y; Props.Scale = scale;
             if (_effect != null)
                 _effect.World = Matrix.CreateScale(scale) * Matrix.CreateTranslation(x, y, 0);
         }

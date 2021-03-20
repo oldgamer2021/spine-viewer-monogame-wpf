@@ -20,13 +20,13 @@ namespace SpineViewer.Common.Player
 
         //private SkeletonData skeletonData;
 
-        public Player_3_7(PlayerInfo info) { Info = info; Stat = new PlayerProps(); }
-        public Player_3_7(PlayerInfo info, PlayerProps stat) { Info = info; Stat = stat; }
+        public Player_3_7(PlayerInfo info) { Info = info; Props = new PlayerProps(); }
+        public Player_3_7(PlayerInfo info, PlayerProps stat) { Info = info; Props = stat; }
 
         public override void Initialize(GraphicsDevice gd)
         {
             _skeletonRenderer = new SkeletonRenderer(gd);
-            _skeletonRenderer.PremultipliedAlpha = Stat.UseAlpha;
+            _skeletonRenderer.PremultipliedAlpha = Props.UseAlpha;
             _effect = _skeletonRenderer.Effect as BasicEffect;
 
             _atlas = new Atlas(Info.AtlasFile, new XnaTextureLoader(gd, Info.PremultipliedAlpha));
@@ -51,15 +51,15 @@ namespace SpineViewer.Common.Player
 
             string curSkin = _skeleton.Data.Skins.Items[0].Name;
             string curAnim = _skeleton.Data.Animations.Items[0].Name;
-            _state.SetAnimation(0, curAnim, Stat.IsLoop);
+            _state.SetAnimation(0, curAnim, Props.IsLoop);
 
             _skeleton.X = 0; _skeleton.Y = 0;
-            _skeleton.ScaleX = Stat.FlipX ? 1 : -1;
-            _skeleton.ScaleY = Stat.FlipY ? -1 : 1;
+            _skeleton.ScaleX = Props.FlipX ? 1 : -1;
+            _skeleton.ScaleY = Props.FlipY ? -1 : 1;
 
             // Return spine info
-            Stat.Skin = curSkin;
-            Stat.Anim = curAnim;
+            Props.Skin = curSkin;
+            Props.Anim = curAnim;
             Info.Version = skeletonData.Version;
             Info.OrgWidth = skeletonData.Width;
             Info.OrgHeight = skeletonData.Height;
@@ -79,23 +79,23 @@ namespace SpineViewer.Common.Player
         {
             base.UpdateStat();
 
-            _skeletonRenderer.PremultipliedAlpha = Stat.UseAlpha;
+            _skeletonRenderer.PremultipliedAlpha = Props.UseAlpha;
 
-            _skeleton.ScaleX = Stat.FlipX ? 1 : -1;
-            _skeleton.ScaleY = Stat.FlipY ? -1 : 1;
+            _skeleton.ScaleX = Props.FlipX ? 1 : -1;
+            _skeleton.ScaleY = Props.FlipY ? -1 : 1;
 
             _state.ClearTracks();
             _skeleton.SetToSetupPose();
-            _state.SetAnimation(0, Stat.Anim, Stat.IsLoop);
+            _state.SetAnimation(0, Props.Anim, Props.IsLoop);
 
-            _skeleton.SetSkin(Stat.Skin);
+            _skeleton.SetSkin(Props.Skin);
             _skeleton.SetSlotsToSetupPose();
         }
 
         public override void Draw(GameTime gameTime, Camera2D cam)
         {
             if (!IsLoaded) return;
-            _state.Update((float)(gameTime.ElapsedGameTime.TotalMilliseconds * Stat.PlaySpeed / 1000));
+            _state.Update((float)(gameTime.ElapsedGameTime.TotalMilliseconds * Props.PlaySpeed / 1000));
             _state.Apply(_skeleton);
             _skeleton.UpdateWorldTransform();
 
